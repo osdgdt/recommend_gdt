@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(git:*)",
-      "Bash(gh repo:*)"
+      "Bash(gh repo:*)",
+      "Bash(pip install:*)",
+      "Bash(sqlite3 bgg_games.db \"SELECT bgg_rank, name, yearpublished, avg_rating, num_ratings FROM games ORDER BY bgg_rank LIMIT 20;\")",
+      "Bash(sqlite3 bgg_games.db \"SELECT bgg_rank, name, year_published, avg_rating, num_ratings FROM games ORDER BY bgg_rank LIMIT 20;\")",
+      "WebFetch(domain:boardgamegeek.com)",
+      "WebFetch(domain:www.reddit.com)",
+      "WebFetch(domain:api.geekdo.com)",
+      "WebFetch(domain:www.boardgamegeek.com)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:bgg-api.readthedocs.io)"
     ]
   }
 }
