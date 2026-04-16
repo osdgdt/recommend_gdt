@@ -403,6 +403,25 @@ def fetch_from_data_dump(conn: sqlite3.Connection) -> int:
             safe_float(col(row, "bayesaverage", "bayesavgrating")),
             safe_int(col(row, "usersrated", "numvoters")),
         ))
+
+        # Save BGG sub-category ranks as coarse categories
+        subcats = {
+            "abstracts_rank":      "Abstract Games",
+            "cgs_rank":            "Customizable Games",
+            "childrensgames_rank": "Children's Games",
+            "familygames_rank":    "Family Games",
+            "partygames_rank":     "Party Games",
+            "strategygames_rank":  "Strategy Games",
+            "thematic_rank":       "Thematic Games",
+            "wargames_rank":       "War Games",
+        }
+        for col_name, cat_name in subcats.items():
+            val = row.get(col_name, "")
+            if val and val not in ("", "0", "N/A"):
+                conn.execute("INSERT OR IGNORE INTO categories (name) VALUES (?)", (cat_name,))
+                cat_id = conn.execute("SELECT id FROM categories WHERE name = ?", (cat_name,)).fetchone()[0]
+                conn.execute("INSERT OR IGNORE INTO game_categories (game_id, category_id) VALUES (?,?)", (gid, cat_id))
+
         saved += 1
 
     conn.commit()
