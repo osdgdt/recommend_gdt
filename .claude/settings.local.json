@@ -16,7 +16,9 @@
       "Bash(taskkill /F /IM python.exe)",
       "Bash(cmd:*)",
       "Bash(sqlite3 bgg_games.db ':*)",
-      "Bash(sqlite3 bgg_games.db \"SELECT bgg_rank || '. ' || name || ' \\(' || year_published || '\\)' FROM games ORDER BY bgg_rank LIMIT 10;\")"
+      "Bash(sqlite3 bgg_games.db \"SELECT bgg_rank || '. ' || name || ' \\(' || year_published || '\\)' FROM games ORDER BY bgg_rank LIMIT 10;\")",
+      "Bash(sqlite3 bgg_games.db \"SELECT m.name FROM mechanics m JOIN game_mechanics gm ON m.id = gm.mechanic_id JOIN games g ON gm.game_id = g.id WHERE g.name LIKE '%Ark Nova%' ORDER BY m.name;\")",
+      "Bash(sqlite3 bgg_games.db \"SELECT m.name FROM mechanics m JOIN game_mechanics gm ON m.id = gm.mechanic_id JOIN games g ON gm.game_id = g.id WHERE g.name LIKE '%Hanabi%' ORDER BY m.name;\")"
     ]
   }
 }
